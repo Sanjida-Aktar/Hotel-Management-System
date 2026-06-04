@@ -51,8 +51,8 @@ class RoomManagement{
     public:
     void addRoom();    
     void viewRooms();
-    // void updateRoom();
-    // void deleteRoom();
+    void searchRoom();
+    void deleteRoom();
 };
 
 int main(){
@@ -82,6 +82,7 @@ void Admin :: dashboard(){
                     int roomChoice;
                     cout<<"\n1. Add Room"<<endl;
                     cout<<"2. View Rooms"<<endl;
+                    cout<<"3. Search Room"<<endl;
                     cout<<"Enter your choice: ";
                     cin>>roomChoice;
                     RoomManagement rm;
@@ -90,6 +91,9 @@ void Admin :: dashboard(){
                     }
                     else if(roomChoice == 2){
                         rm.viewRooms();
+                    }
+                    else if(roomChoice == 3){
+                        rm.searchRoom();
                     }
                     else{
                         cout<<"Invalid choice! Returning to dashboard.\n";
@@ -153,4 +157,32 @@ void Admin :: dashboard(){
         file.close();
     }
 
+    void RoomManagement :: searchRoom(){
+        ifstream file("rooms.txt");
+        if(!file.is_open()){
+            cout<<"Error opening file!"<<endl;
+            return;
+        }
+        int searchNumber;
+        cout<<"Enter room number to search: ";
+        cin>>searchNumber;
+        int rNumber;
+        string rType;
+        double rPrice;
+       
+
+        if(file.is_open()){
+            while(file>>rNumber>>rType>>rPrice){
+                if(rNumber == searchNumber){
+                    cout<< "Room is found!"<<endl;
+                    file.close();
+                    return;
+                }
+            }
+            cout<<"Room not found!"<<endl;
+            file.close();
+        }
+        
+
+    }
     
