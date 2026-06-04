@@ -30,6 +30,7 @@ class Admin{
             if(file_username == username && file_password == password){
                 cout<<"Login successful!"<<endl;
                 dashboard();
+                return 1; // Return success
                 
             }
         }
@@ -38,6 +39,22 @@ class Admin{
     }
     
 };
+//===============================
+// RoomManagement class to handle room-related operations
+
+class RoomManagement{
+    int roomNumber;
+    string roomType;
+    double price;
+    bool isAvailable;
+
+    public:
+    void addRoom();    
+    void viewRooms();
+    // void updateRoom();
+    // void deleteRoom();
+};
+
 int main(){
     Admin admin;
     admin.input();
@@ -60,9 +77,25 @@ void Admin :: dashboard(){
             cout<<"Enter your choice: ";
             cin>>choice;
             switch(choice){
-                case 1:
+                case 1:{
                     cout<<"Room Management selected\n";
+                    int roomChoice;
+                    cout<<"\n1. Add Room"<<endl;
+                    cout<<"2. View Rooms"<<endl;
+                    cout<<"Enter your choice: ";
+                    cin>>roomChoice;
+                    RoomManagement rm;
+                    if(roomChoice == 1){
+                        rm.addRoom();
+                    }
+                    else if(roomChoice == 2){
+                        rm.viewRooms();
+                    }
+                    else{
+                        cout<<"Invalid choice! Returning to dashboard.\n";
+                    }
                     break;
+                }
                 case 2:
                     cout<<"Customer Management selected\n";
                     break;
@@ -85,3 +118,39 @@ void Admin :: dashboard(){
             }
             while(choice != 6);
     }
+
+    void RoomManagement :: addRoom(){
+        ofstream file("rooms.txt", ios::app);
+
+        cout<<"Enter room number: ";
+        cin>>roomNumber;
+        cout<<"Enter room type(Standard/Deluxe/vip): ";
+        cin>>roomType;
+        cout<<"Enter price per night: ";
+        cin>>price;
+        isAvailable = true;
+        file<<roomNumber<<" "<<roomType<<" "<<price<<" "<<isAvailable<<endl;
+
+        file.close();
+        cout<<"Room added successfully!"<<endl;
+    }
+
+    void RoomManagement :: viewRooms(){
+        ifstream file("rooms.txt");
+        if(!file.is_open()){
+            cout<<"Error opening file!"<<endl;
+            return;
+        }
+        int rNumber;
+        string rType;
+        double rPrice;
+        bool rAvailable;
+
+        cout<<"\n=======Room List=======\n";
+        while(file>>rNumber>>rType>>rPrice>>rAvailable){
+            cout<<"Room Number: "<<rNumber<<" | Type: "<<rType<<" | Price: "<<rPrice<<" | Available: "<<(rAvailable ? "Yes" : "No")<<endl;
+        }
+        file.close();
+    }
+
+    
