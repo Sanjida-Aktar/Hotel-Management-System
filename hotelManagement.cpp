@@ -95,6 +95,9 @@ void Admin :: dashboard(){
                     else if(roomChoice == 3){
                         rm.searchRoom();
                     }
+                    else if(roomChoice == 4){
+                        rm.deleteRoom();
+                    }
                     else{
                         cout<<"Invalid choice! Returning to dashboard.\n";
                     }
@@ -184,5 +187,29 @@ void Admin :: dashboard(){
         }
         
 
+    }
+
+    void RoomManagement :: deleteRoom(){
+        ifstream file("rooms.txt");
+        if(!file.is_open()){
+            cout<<"Error opening file!"<<endl;
+            return;
+        }
+        int deleteNumber;
+        cout<<"Enter room number to delete: ";
+        cin>>deleteNumber;
+        int rNumber;
+        string rType;
+        double rPrice;
+        bool rAvailable;
+
+        ifstream file ("rooms.txt");
+        while(file>>rNumber>>rType>>rPrice>>rAvailable){
+            if(rNumber == deleteNumber){
+                cout<<"Room is found and deleted!"<<endl;
+                file.close();
+                return;
+            }
+        }
     }
     
