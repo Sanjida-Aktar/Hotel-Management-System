@@ -326,11 +326,9 @@ void Admin :: dashboard(){
         int deleteID;
         cout<<"Enter customer ID to delete: ";
         cin>>deleteID;
-        int cID;
-        string cName, cPhone, cEmail;
-
+        int cID;update
         
-        while(file>>cID>>cName>>cPhone>>cEmail){
+        while(file>>cID){
             if(cID == deleteID){
                 cout<<"Customer is found and deleted!"<<endl;
                 file.close();
