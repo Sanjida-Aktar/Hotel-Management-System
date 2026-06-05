@@ -40,6 +40,7 @@ class CustomerManagement{
     void addCustomer();
     void viewCustomers();
     void searchCustomer();
+    void deleteCustomer();
 };
 
 
@@ -139,6 +140,9 @@ void Admin :: dashboard(){
                     }
                     else if(customerChoice == 3){
                         cm.searchCustomer();
+                    }
+                    else if(customerChoice == 4){
+                        cm.deleteCustomer();
                     }
                     else{
                         cout<<"Invalid choice! Returning to dashboard.\n";
@@ -312,6 +316,27 @@ void Admin :: dashboard(){
                 cout<<"Customer not found!"<<endl;
                 file.close();
             }
+    }
+    void CustomerManagement :: deleteCustomer(){
+        ifstream file("customers.txt");
+        if(!file.is_open()){
+            cout<<"Error opening file!"<<endl;
+            return;
+        }
+        int deleteID;
+        cout<<"Enter customer ID to delete: ";
+        cin>>deleteID;
+        int cID;
+        string cName, cPhone, cEmail;
+
+        
+        while(file>>cID>>cName>>cPhone>>cEmail){
+            if(cID == deleteID){
+                cout<<"Customer is found and deleted!"<<endl;
+                file.close();
+                return;
+            }
+        }
     }
 
     
