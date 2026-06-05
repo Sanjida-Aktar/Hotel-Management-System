@@ -8,17 +8,59 @@ class Admin{
     string password;
     public:
     Admin() {}
-    Admin(string u, string p):username(u), password(p) {}
-    void dashboard();
+    void input();
+    int login();
+    void dashboard();    
+};
 
-    void input(){
-        cout<<"Enter username: ";
-        cin>>username;
-        cout<<"Enter password: ";
-        cin>>password;
-    }
+//===============================
+// RoomManagement class to handle room-related operations
 
-    int login(){
+class RoomManagement{
+    int roomNumber;
+    string roomType;
+    double price;
+    bool isAvailable;
+
+    public:
+    void addRoom();    
+    void viewRooms();
+    void searchRoom();
+    void deleteRoom();
+};
+
+//===============================
+// CustomerManagement class to handle customer-related operations
+class CustomerManagement{
+    int customerID;
+    string name;
+    string phone_number;
+    string email;
+    public:
+    void addCustomer();
+    void viewCustomers();
+    void searchCustomer();
+};
+
+
+int main(){
+    Admin admin;
+    admin.input();
+    admin.login();
+    
+    return 0;
+}
+
+//===============================
+//login details input function
+void Admin :: input(){
+    cout<<"Enter username: ";
+    cin>>username;
+    cout<<"Enter password: ";
+    cin>>password;
+}
+
+int Admin :: login(){
         ifstream file("login.txt");
         if(!file.is_open()){
             cout<<"Error opening file!"<<endl;
@@ -38,30 +80,6 @@ class Admin{
         return 0;
     }
     
-};
-//===============================
-// RoomManagement class to handle room-related operations
-
-class RoomManagement{
-    int roomNumber;
-    string roomType;
-    double price;
-    bool isAvailable;
-
-    public:
-    void addRoom();    
-    void viewRooms();
-    void searchRoom();
-    void deleteRoom();
-};
-
-int main(){
-    Admin admin;
-    admin.input();
-    admin.login();
-    
-    return 0;
-}
 
 void Admin :: dashboard(){
         int choice;
@@ -103,9 +121,30 @@ void Admin :: dashboard(){
                     }
                     break;
                 }
-                case 2:
+                case 2:{
                     cout<<"Customer Management selected\n";
+                    int customerChoice;
+                    cout<<"\n1. Add Customer"<<endl;
+                    cout<<"2. View Customers"<<endl;
+                    cout<<"3. Search Customer"<<endl;
+                    cout<<"Enter your choice: ";
+                    cin>>customerChoice;
+                    CustomerManagement cm;
+
+                    if (customerChoice == 1){
+                        cm.addCustomer();
+                    }
+                    else if(customerChoice == 2){
+                        cm.viewCustomers();
+                    }
+                    else if(customerChoice == 3){
+                        cm.searchCustomer();
+                    }
+                    else{
+                        cout<<"Invalid choice! Returning to dashboard.\n";
+                    }
                     break;
+                }
                 case 3:
                     cout<<"Booking Management selected\n";
                     break;
@@ -125,6 +164,9 @@ void Admin :: dashboard(){
             }
             while(choice != 6);
     }
+
+    // ===============================
+    // RoomManagement class functions
 
     void RoomManagement :: addRoom(){
         ofstream file("rooms.txt", ios::app);
@@ -212,4 +254,41 @@ void Admin :: dashboard(){
             }
         }
     }
+
+    // ==============================
+    // CustomerManagement class functions
+    void CustomerManagement :: addCustomer(){
+        ofstream file("customers.txt", ios::app);
+
+        cout<<"Enter customer ID: ";
+        cin>>customerID;
+        cout<<"Enter name: ";
+        cin>>name;
+        cout<<"Enter phone number: ";
+        cin>>phone_number;
+        cout<<"Enter email: ";
+        cin>>email;
+
+        file<<customerID<<" "<<name<<" "<<phone_number<<" "<<email<<endl;
+
+        file.close();
+        cout<<"Customer added successfully!"<<endl;
+    }
+
+    void CustomerManagement :: viewCustomers(){
+        ifstream file("customers.txt");
+        if(!file.is_open()){
+            cout<<"Error opening file!"<<endl;
+            return;
+        }
+        int cID;
+        string cName, cPhone, cEmail;
+
+        cout<<"\n=======Customer List=======\n";
+        while(file>>cID>>cName>>cPhone>>cEmail){
+            cout<<"Customer ID: "<<cID<<" | Name: "<<cName<<" | Phone: "<<cPhone<<" | Email: "<<cEmail<<endl;
+        }
+        file.close();
+    }
+
     
