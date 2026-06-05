@@ -245,7 +245,7 @@ void Admin :: dashboard(){
         double rPrice;
         bool rAvailable;
 
-        ifstream file ("rooms.txt");
+        
         while(file>>rNumber>>rType>>rPrice>>rAvailable){
             if(rNumber == deleteNumber){
                 cout<<"Room is found and deleted!"<<endl;
@@ -289,6 +289,29 @@ void Admin :: dashboard(){
             cout<<"Customer ID: "<<cID<<" | Name: "<<cName<<" | Phone: "<<cPhone<<" | Email: "<<cEmail<<endl;
         }
         file.close();
+    }
+
+    void CustomerManagement :: searchCustomer(){
+        ifstream file("customers.txt");
+            if(!file.is_open()){
+            cout<<"Error openning file!"<<endl;
+            return;
+            }
+            int search_id;
+            cout<<"Enter customer ID to search: ";
+            cin>>search_id;
+            int cid;
+            if(file.is_open()){
+                while(file>>cid){
+                    if(cid == search_id){
+                        cout<<"Customer is found!"<<endl;
+                        file.close();
+                        return;
+                    }
+                }
+                cout<<"Customer not found!"<<endl;
+                file.close();
+            }
     }
 
     
