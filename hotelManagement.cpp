@@ -43,6 +43,13 @@ class CustomerManagement{
     void deleteCustomer();
 };
 
+class BookingManagement{
+    void addBooking();
+    void viewBookings();
+    void cancelBooking();
+
+};
+
 
 int main(){
     Admin admin;
@@ -150,8 +157,31 @@ void Admin :: dashboard(){
                     break;
                 }
                 case 3:
-                    cout<<"Booking Management selected\n";
-                    break;
+                    {
+                        cout<<"Booling management selected\n";
+                        int booingmanage;
+                        cout<<"1. Booking Room"<<endl;
+                        cout<<"2. Booling Information"<endl;
+                        cout<<"3. Cancel Booking"<<endl;
+                        cout<<"Enter your choice: ";
+                        cin>>booingmanage;
+                            BookingManagement bm;
+                            if(booingmanage == 1){
+                                bm.addBooking();
+                            }
+                            else if(booingmanage == 2){
+                                bm.viewBookings();
+                            }
+                            else if(booingmanage == 3){
+                                bm.cancelBooking();
+                            }
+                            else{
+                                cout<<"Invalid choice! Returning to dashboard.\n";
+                            }
+
+                        break;
+                    }
+                    
                 case 4:
                     cout<<"Billing System selected\n";
                     break;
@@ -326,7 +356,7 @@ void Admin :: dashboard(){
         int deleteID;
         cout<<"Enter customer ID to delete: ";
         cin>>deleteID;
-        int cID;update
+        int cID;
         
         while(file>>cID){
             if(cID == deleteID){
@@ -335,6 +365,19 @@ void Admin :: dashboard(){
                 return;
             }
         }
+    }
+
+    //==========================
+    // Booking information
+    void BookingManagement:: addBooking(){
+        int booking_ID;
+        int customer_ID;
+        int room_number;
+        string check_in_date;
+        string check_out_date;
+
+        ofstream file("bookings.txt", ios::app);
+        
     }
 
     
