@@ -62,9 +62,9 @@ int main(){
 //===============================
 //login details input function
 void Admin :: input(){
-    cout<<"Enter username: ";
+    cout<<"Enter username(admin): ";
     cin>>username;
-    cout<<"Enter password: ";
+    cout<<"Enter password(admin123): ";
     cin>>password;
 }
 
@@ -376,7 +376,8 @@ void Admin :: dashboard(){
         string check_in_date;
         string check_out_date;
 
-        ofstream file("bookings.txt", ios::app);
+        
+
         
     }
 
