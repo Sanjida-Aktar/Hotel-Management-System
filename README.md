@@ -52,10 +52,7 @@ This project demonstrates the practical use of:
 
 ### Search Room
 - Search room by room number.
-
-### Update Room
-- Modify room details.
-
+- 
 ### Delete Room
 - Remove room information.
 
@@ -82,27 +79,8 @@ Store customer information:
 ### Search Customer
 - Find customer using Customer ID.
 
-### Update Customer
-- Modify customer information.
-
 ### Delete Customer
 - Remove customer records.
-
----
-
-## 4. Room Categories
-
-### Standard Room
-- Basic facilities
-- Low cost
-
-### Deluxe Room
-- Better facilities
-- Medium cost
-
-### Suite/VIP Room
-- Premium facilities
-- Highest cost
 
 ---
 
